@@ -7,12 +7,11 @@ import plotly.graph_objects as go
 import plotly.subplots as sp
 from plotly.subplots import make_subplots
 
-deliveries = pd.read_csv('ipl_ball_by_ball_data.csv')
-battingcard = pd.read_csv('ipl_batting_card.csv')
-bowlingcard = pd.read_csv('ipl_bowling_card.csv')
-players = pd.read_csv('ipl_players_info.csv')
-results = pd.read_csv('results.csv')
-# results = helper.fixingdf(results)
+results = pd.read_csv(r'https://raw.githubusercontent.com/Prateek-013/IPL-Data-Analysis-Web-App/main/results.csv')
+deliveries = pd.read_csv(r'https://raw.githubusercontent.com/Prateek-013/IPL-Data-Analysis-Web-App/main/ipl_ball_by_ball_data.csv')
+battingcard = pd.read_csv(r'https://raw.githubusercontent.com/Prateek-013/IPL-Data-Analysis-Web-App/main/ipl_batting_card.csv')
+bowlingcard = pd.read_csv(r'https://raw.githubusercontent.com/Prateek-013/IPL-Data-Analysis-Web-App/main/ipl_bowling_card.csv')
+players = pd.read_csv(r'https://raw.githubusercontent.com/Prateek-013/IPL-Data-Analysis-Web-App/main/ipl_players_info.csv')
 
 st.set_page_config(layout="wide")
 
