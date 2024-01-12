@@ -1,6 +1,6 @@
 streamlit
 plotly
-seaborn==
+seaborn
 pandas
 numpy
 matplotlib
