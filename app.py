@@ -53,7 +53,7 @@ if user_menu == 'Home Page':
     st.markdown("<br>", unsafe_allow_html=True)
 
     st.write(f"**Disclaimer:** "
-             f"The statistics presented herein are derived exclusively from completed games. All abandoned games have been systematically excluded from the analysis. Consequently, there may be slighy variations between the presented statistics and actual statistics. Users are encouraged to interpret the data with this consideration in mind.")
+             f"The statistics presented herein are derived exclusively from completed games. All abandoned games have been systematically excluded from the analysis. Consequently, there may be slight variations between the presented statistics and actual statistics. Users are encouraged to interpret the data with this consideration in mind.")
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
