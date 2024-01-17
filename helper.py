@@ -42,11 +42,46 @@ def match_scorecard(results, battingcard, bowlingcard,players, match_name, seaso
     tempbowling = bowlingcard[bowlingcard['match_id'] == tempresultsdf['match_id'][0]].merge(
         players[['player_id', 'player_name', 'image_url']], left_on='bowler_id', right_on='player_id', how='left')
 
-    if tempresultsdf['team1_name'][0] == 'Gujarat Titans':
+        if tempresultsdf['team1_name'][0] == 'Gujarat Titans':
         tempresultsdf['team1_url'] = "https://www.timesofsports.com/wp-content/uploads/2022/02/Gujarat-Titans-Logo.png"
     elif tempresultsdf['team2_name'][0] == 'Gujarat Titans':
         tempresultsdf['team2_url'] = "https://www.timesofsports.com/wp-content/uploads/2022/02/Gujarat-Titans-Logo.png"
 
+    if tempresultsdf['team1_name'][0] == 'Chennai Super Kings':
+        tempresultsdf['team1_url'] = "https://seeklogo.com/images/I/ipl-chennai-super-kings-logo-E534CFAF4A-seeklogo.com.png"
+    elif tempresultsdf['team2_name'][0] == 'Chennai Super Kings':
+        tempresultsdf['team2_url'] = "https://seeklogo.com/images/I/ipl-chennai-super-kings-logo-E534CFAF4A-seeklogo.com.png"
+
+    if tempresultsdf['team1_name'][0] == 'Mumbai Indians':
+        tempresultsdf['team1_url'] = "https://seeklogo.com/images/I/ipl-mumbai-indians-logo-5FD6E24965-seeklogo.com.png"
+    elif tempresultsdf['team2_name'][0] == 'Mumbai Indians':
+        tempresultsdf['team2_url'] = "https://seeklogo.com/images/I/ipl-mumbai-indians-logo-5FD6E24965-seeklogo.com.png"
+
+    if tempresultsdf['team1_name'][0] == 'Punjab Kings':
+        tempresultsdf['team1_url'] = "https://seeklogo.com/images/I/ipl-kings-xi-punjab-logo-6747D5C02B-seeklogo.com.png"
+    elif tempresultsdf['team2_name'][0] == 'Punjab Kings':
+        tempresultsdf['team2_url'] = "https://seeklogo.com/images/I/ipl-kings-xi-punjab-logo-6747D5C02B-seeklogo.com.png"
+
+    if tempresultsdf['team1_name'][0] == 'Rajasthan Royals':
+        tempresultsdf['team1_url'] = "https://seeklogo.com/images/I/ipl-rajasthan-royals-logo-F69DDCEF15-seeklogo.com.png"
+    elif tempresultsdf['team2_name'][0] == 'Rajasthan Royals':
+        tempresultsdf['team2_url'] = "https://seeklogo.com/images/I/ipl-rajasthan-royals-logo-F69DDCEF15-seeklogo.com.png"
+
+    if tempresultsdf['team1_name'][0] == 'Royal Challengers Bangalore':
+        tempresultsdf['team1_url'] = "https://seeklogo.com/images/R/rcb-logo-526F657E15-seeklogo.com.png"
+    elif tempresultsdf['team2_name'][0] == 'Royal Challengers Bangalore':
+        tempresultsdf['team2_url'] = "https://seeklogo.com/images/R/rcb-logo-526F657E15-seeklogo.com.png"
+
+    if tempresultsdf['team1_name'][0] == 'Kolkata Knight Riders':
+        tempresultsdf['team1_url'] = "https://seeklogo.com/images/K/kolkata-knight-riders-logo-532F9512B0-seeklogo.com.png?v=638133656700000000"
+    elif tempresultsdf['team2_name'][0] == 'Kolkata Knight Riders':
+        tempresultsdf['team2_url'] = "https://seeklogo.com/images/K/kolkata-knight-riders-logo-532F9512B0-seeklogo.com.png?v=638133656700000000"
+
+    if tempresultsdf['team1_name'][0] == 'Deccan Chargers':
+        tempresultsdf['team1_url'] = "https://seeklogo.com/images/I/ipl-deccan-chargers-logo-8BA14B44F2-seeklogo.com.png"
+    elif tempresultsdf['team2_name'][0] == 'Deccan Chargers':
+        tempresultsdf['team2_url'] = "https://seeklogo.com/images/I/ipl-deccan-chargers-logo-8BA14B44F2-seeklogo.com.png"
+    
     return tempresultsdf, tempbatting, tempbowling
 
 def match_scorecard_line(results, deliveries, match_name, season):
@@ -72,8 +107,23 @@ def basic_stats(results, team):
         0]
     if team == "Gujarat Titans":
         teamurl = "https://www.timesofsports.com/wp-content/uploads/2022/02/Gujarat-Titans-Logo.png"
+    elif team == 'Chennai Super Kings':
+        teamurl = 'https://seeklogo.com/images/I/ipl-chennai-super-kings-logo-E534CFAF4A-seeklogo.com.png'
+    elif team == 'Mumbai Indians':
+        teamurl = 'https://seeklogo.com/images/I/ipl-mumbai-indians-logo-5FD6E24965-seeklogo.com.png'
+    elif team == 'Punjab Kings':
+        teamurl = 'https://seeklogo.com/images/I/ipl-kings-xi-punjab-logo-6747D5C02B-seeklogo.com.png'
+    elif team == 'Rajasthan Royals':
+        teamurl = 'https://seeklogo.com/images/I/ipl-rajasthan-royals-logo-F69DDCEF15-seeklogo.com.png'
+    elif team == 'Royal Challengers Bangalore':
+        teamurl = 'https://seeklogo.com/images/R/rcb-logo-526F657E15-seeklogo.com.png'
+    elif team == 'Deccan Chargers':
+        teamurl = 'https://seeklogo.com/images/I/ipl-deccan-chargers-logo-8BA14B44F2-seeklogo.com.png'
+    elif team == 'Kolkata Knight Riders':
+        teamurl = 'https://seeklogo.com/images/K/kolkata-knight-riders-logo-532F9512B0-seeklogo.com.png?v=638133656700000000'
     else:
         teamurl = results[results['team1_name'] == team].iloc[0, :]['team1_url']
+    
     return titles, games, wins, losses, teamurl
 
 
