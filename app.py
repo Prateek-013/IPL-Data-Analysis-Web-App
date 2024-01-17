@@ -627,7 +627,7 @@ if user_menu == 'Player Analysis':
 
         with col3:
             st.subheader('Purple Caps')
-            st.markdown(f"<p style='font-size:20px;'>{purplecap} runs</p>", unsafe_allow_html=True)
+            st.markdown(f"<p style='font-size:20px;'>{purplecap}</p>", unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
 
             st.subheader('5 Wicket Hauls')
