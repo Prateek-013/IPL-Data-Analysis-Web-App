@@ -81,7 +81,12 @@ def match_scorecard(results, battingcard, bowlingcard,players, match_name, seaso
         tempresultsdf['team1_url'] = "https://seeklogo.com/images/I/ipl-deccan-chargers-logo-8BA14B44F2-seeklogo.com.png"
     elif tempresultsdf['team2_name'][0] == 'Deccan Chargers':
         tempresultsdf['team2_url'] = "https://seeklogo.com/images/I/ipl-deccan-chargers-logo-8BA14B44F2-seeklogo.com.png"
-    
+
+    if tempresultsdf['team1_name'][0] == 'Sunrisers Hyderabad':
+        tempresultsdf['team1_url'] = "https://seeklogo.com/images/S/sunrisers-hyderabad-logo-7D9F34361F-seeklogo.com.png?v=638245919490000000"
+    elif tempresultsdf['team2_name'][0] == 'Sunrisers Hyderabad':
+        tempresultsdf['team2_url'] = "https://seeklogo.com/images/S/sunrisers-hyderabad-logo-7D9F34361F-seeklogo.com.png?v=638245919490000000"
+        
     return tempresultsdf, tempbatting, tempbowling
 
 def match_scorecard_line(results, deliveries, match_name, season):
@@ -121,6 +126,8 @@ def basic_stats(results, team):
         teamurl = 'https://seeklogo.com/images/I/ipl-deccan-chargers-logo-8BA14B44F2-seeklogo.com.png'
     elif team == 'Kolkata Knight Riders':
         teamurl = 'https://seeklogo.com/images/K/kolkata-knight-riders-logo-532F9512B0-seeklogo.com.png?v=638133656700000000'
+    elif team == 'Sunrisers Hyderabad':
+        teamurl = 'https://seeklogo.com/images/S/sunrisers-hyderabad-logo-7D9F34361F-seeklogo.com.png?v=638245919490000000'
     else:
         teamurl = results[results['team1_name'] == team].iloc[0, :]['team1_url']
     
