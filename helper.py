@@ -42,7 +42,7 @@ def match_scorecard(results, battingcard, bowlingcard,players, match_name, seaso
     tempbowling = bowlingcard[bowlingcard['match_id'] == tempresultsdf['match_id'][0]].merge(
         players[['player_id', 'player_name', 'image_url']], left_on='bowler_id', right_on='player_id', how='left')
 
-        if tempresultsdf['team1_name'][0] == 'Gujarat Titans':
+    if tempresultsdf['team1_name'][0] == 'Gujarat Titans':
         tempresultsdf['team1_url'] = "https://www.timesofsports.com/wp-content/uploads/2022/02/Gujarat-Titans-Logo.png"
     elif tempresultsdf['team2_name'][0] == 'Gujarat Titans':
         tempresultsdf['team2_url'] = "https://www.timesofsports.com/wp-content/uploads/2022/02/Gujarat-Titans-Logo.png"
