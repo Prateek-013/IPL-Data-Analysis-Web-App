@@ -82,13 +82,12 @@ if user_menu == 'Match Scorecard':
     st.markdown(f"**Match Location:** {match['match_venue_city'][0]},{match['match_venue_country'][0]}")
 
     st.markdown(f"**Toss Result:** {match['toss_winner'][0]} won the toss and chose to {match['toss_winner_choice'][0]}.")
-    st.subheader(f"**First Innings Score:** {match['team1_name'][0]} scored {match['team1_runs_scored'][0].astype(int)}/{match['team1_wickets_fell'][0].astype(int)}.")
 
     col1, col2 = st.columns(2)
 
     with col1:
         #First Innings Batting
-    
+        st.subheader(f"**1st Innings:** {match['team1_name'][0]} scored {match['team1_runs_scored'][0].astype(int)}/{match['team1_wickets_fell'][0].astype(int)}.")
         first_innings_batting_top5 = batting[(batting['innings'] == 1) & (batting['runs'].notnull())].sort_values(by='runs', ascending=False).head(5)
     
         fig, ax = plt.subplots(figsize=(10, 6))
@@ -129,7 +128,7 @@ if user_menu == 'Match Scorecard':
 
     with col2:
         #Second Innings Batting
-        st.subheader(f"**Second Innings Score:** {match['team2_name'][0]} scored {match['team2_runs_scored'][0].astype(int)}/{match['team2_wickets_fell'][0].astype(int)}.")
+        st.subheader(f"**2nd Innings:** {match['team2_name'][0]} scored {match['team2_runs_scored'][0].astype(int)}/{match['team2_wickets_fell'][0].astype(int)}.")
         second_innings_batting_top5 = batting[(batting['innings'] == 2) & (batting['runs'].notnull())].sort_values(by='runs', ascending=False).head(5)
     
         fig, ax = plt.subplots(figsize=(10, 6))
