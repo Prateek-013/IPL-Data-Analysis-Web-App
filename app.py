@@ -84,82 +84,85 @@ if user_menu == 'Match Scorecard':
     st.markdown(f"**Toss Result:** {match['toss_winner'][0]} won the toss and chose to {match['toss_winner_choice'][0]}.")
     st.subheader(f"**First Innings Score:** {match['team1_name'][0]} scored {match['team1_runs_scored'][0].astype(int)}/{match['team1_wickets_fell'][0].astype(int)}.")
 
-    #First Innings Batting
+    col1, col2 = st.columns(2)
 
-    first_innings_batting_top5 = batting[(batting['innings'] == 1) & (batting['runs'].notnull())].sort_values(by='runs', ascending=False).head(5)
-
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.barplot(x='player_name', y='runs', data=first_innings_batting_top5, palette='viridis')
-    plt.xticks(rotation=90, ha='center')
-    for p in ax.patches:
-        ax.annotate(f'{p.get_height():.0f}', (p.get_x() + p.get_width() / 2., p.get_height()),
-                    ha='center', va='center', fontsize=10, color='black', xytext=(0, 10),
-                    textcoords='offset points')
-    plt.title('Top 5 Batsmen in 1st Innings')
-    plt.xlabel('Batsmen')
-    plt.ylabel('Runs')
-    st.pyplot(fig)
-
-    column_dtypes = {'runs': 'int', 'balls': 'int', 'fours': 'int', 'sixes': 'int', 'strikerate': 'float'}
-    tempbattingdf = first_innings_batting_top5[['player_name', 'runs', 'balls', 'fours', 'sixes', 'strikerate']]
-    tempbattingdf = tempbattingdf.astype(column_dtypes)
-    st.table(tempbattingdf.reset_index(drop=True))
-
-
-    #First Innings Bowling
-
-    first_innings_bowling_top5 = bowling[(bowling['innings'] == 1) & (bowling['wickets'] != 0)].sort_values(by=['wickets', 'economy'],
-                                                                                          ascending=[False, True]).head(5)
-    fig, ax = plt.subplots(figsize=(12, 8))  # Increase figure size
-    labels = [f"{player['player_name']} ({int(player['wickets'])}/{int(player['conceded'])})" for _, player in
-              first_innings_bowling_top5.iterrows()]
-    wedges, texts, autotexts = ax.pie(first_innings_bowling_top5['wickets'], labels=labels, startangle=90, autopct='',
-                                      pctdistance=0.85, colors=sns.color_palette('viridis'))
-    plt.title('Top Bowlers in 1st Innings')
-    st.pyplot(fig)
-
-    column_bowling_dtypes = {'overs': 'float', 'wickets': 'int', 'conceded': 'int', 'economy': 'float'}
-    tempbowlingdf = first_innings_bowling_top5[['player_name', 'overs', 'wickets', 'conceded', 'economy']]
-    tempbowlingdf = tempbowlingdf.astype(column_bowling_dtypes)
-    st.table(tempbowlingdf.reset_index(drop=True))
+    with col1:
+        #First Innings Batting
+    
+        first_innings_batting_top5 = batting[(batting['innings'] == 1) & (batting['runs'].notnull())].sort_values(by='runs', ascending=False).head(5)
+    
+        fig, ax = plt.subplots(figsize=(10, 6))
+        sns.barplot(x='player_name', y='runs', data=first_innings_batting_top5, palette='viridis')
+        plt.xticks(rotation=90, ha='center')
+        for p in ax.patches:
+            ax.annotate(f'{p.get_height():.0f}', (p.get_x() + p.get_width() / 2., p.get_height()),
+                        ha='center', va='center', fontsize=10, color='black', xytext=(0, 10),
+                        textcoords='offset points')
+        plt.title('Top 5 Batsmen in 1st Innings')
+        plt.xlabel('Batsmen')
+        plt.ylabel('Runs')
+        st.pyplot(fig)
+    
+        column_dtypes = {'runs': 'int', 'balls': 'int', 'fours': 'int', 'sixes': 'int', 'strikerate': 'float'}
+        tempbattingdf = first_innings_batting_top5[['player_name', 'runs', 'balls', 'fours', 'sixes', 'strikerate']]
+        tempbattingdf = tempbattingdf.astype(column_dtypes)
+        st.table(tempbattingdf.reset_index(drop=True))
 
 
-    #Second Innings Batting
-    st.subheader(f"**Second Innings Score:** {match['team2_name'][0]} scored {match['team2_runs_scored'][0].astype(int)}/{match['team2_wickets_fell'][0].astype(int)}.")
-    second_innings_batting_top5 = batting[(batting['innings'] == 2) & (batting['runs'].notnull())].sort_values(by='runs', ascending=False).head(5)
+        #First Innings Bowling
+    
+        first_innings_bowling_top5 = bowling[(bowling['innings'] == 1) & (bowling['wickets'] != 0)].sort_values(by=['wickets', 'economy'],
+                                                                                              ascending=[False, True]).head(5)
+        fig, ax = plt.subplots(figsize=(12, 8))  # Increase figure size
+        labels = [f"{player['player_name']} ({int(player['wickets'])}/{int(player['conceded'])})" for _, player in
+                  first_innings_bowling_top5.iterrows()]
+        wedges, texts, autotexts = ax.pie(first_innings_bowling_top5['wickets'], labels=labels, startangle=90, autopct='',
+                                          pctdistance=0.85, colors=sns.color_palette('viridis'))
+        plt.title('Top Bowlers in 1st Innings')
+        st.pyplot(fig)
+    
+        column_bowling_dtypes = {'overs': 'float', 'wickets': 'int', 'conceded': 'int', 'economy': 'float'}
+        tempbowlingdf = first_innings_bowling_top5[['player_name', 'overs', 'wickets', 'conceded', 'economy']]
+        tempbowlingdf = tempbowlingdf.astype(column_bowling_dtypes)
+        st.table(tempbowlingdf.reset_index(drop=True))
 
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.barplot(x='player_name', y='runs', data=second_innings_batting_top5, palette='viridis')
-    plt.xticks(rotation=90, ha='center')
-    for p in ax.patches:
-        ax.annotate(f'{p.get_height():.0f}', (p.get_x() + p.get_width() / 2., p.get_height()),
-                    ha='center', va='center', fontsize=10, color='black', xytext=(0, 10),
-                    textcoords='offset points')
-    plt.title('Top 5 Batsmen in 2nd Innings')
-    plt.xlabel('Batsmen')
-    plt.ylabel('Runs')
-    st.pyplot(fig)
 
-    column_dtypes = {'runs': 'int', 'balls': 'int', 'fours': 'int', 'sixes': 'int', 'strikerate': 'float'}
-    tempbattingdf2 = second_innings_batting_top5[['player_name', 'runs', 'balls', 'fours', 'sixes', 'strikerate']]
-    tempbattingdf2 = tempbattingdf2.astype(column_dtypes)
-    st.table(tempbattingdf2.reset_index(drop=True))
+    with col2:
+        #Second Innings Batting
+        st.subheader(f"**Second Innings Score:** {match['team2_name'][0]} scored {match['team2_runs_scored'][0].astype(int)}/{match['team2_wickets_fell'][0].astype(int)}.")
+        second_innings_batting_top5 = batting[(batting['innings'] == 2) & (batting['runs'].notnull())].sort_values(by='runs', ascending=False).head(5)
+    
+        fig, ax = plt.subplots(figsize=(10, 6))
+        sns.barplot(x='player_name', y='runs', data=second_innings_batting_top5, palette='viridis')
+        plt.xticks(rotation=90, ha='center')
+        for p in ax.patches:
+            ax.annotate(f'{p.get_height():.0f}', (p.get_x() + p.get_width() / 2., p.get_height()),
+                        ha='center', va='center', fontsize=10, color='black', xytext=(0, 10),
+                        textcoords='offset points')
+        plt.title('Top 5 Batsmen in 2nd Innings')
+        plt.xlabel('Batsmen')
+        plt.ylabel('Runs')
+        st.pyplot(fig)
+    
+        column_dtypes = {'runs': 'int', 'balls': 'int', 'fours': 'int', 'sixes': 'int', 'strikerate': 'float'}
+        tempbattingdf2 = second_innings_batting_top5[['player_name', 'runs', 'balls', 'fours', 'sixes', 'strikerate']]
+        tempbattingdf2 = tempbattingdf2.astype(column_dtypes)
+        st.table(tempbattingdf2.reset_index(drop=True))
 
-    #Second Innings Bowling
-
-    second_innings_bowling_top5 = bowling[(bowling['innings'] == 2) & (bowling['wickets'] != 0)].sort_values(by=['wickets', 'economy'],ascending=[False, True]).head(5)
-    fig, ax = plt.subplots(figsize=(12, 8))  # Increase figure size
-    labels = [f"{player['player_name']} ({int(player['wickets'])}/{int(player['conceded'])})" for _, player in
-              second_innings_bowling_top5.iterrows()]
-    wedges, texts, autotexts = ax.pie(second_innings_bowling_top5['wickets'], labels=labels, startangle=90, autopct='',
-                                      pctdistance=0.85, colors=sns.color_palette('viridis'))
-    plt.title('Top Bowlers in 2nd Innings')
-    st.pyplot(fig)
-
-    column_bowling_dtypes = {'overs': 'float', 'wickets': 'int', 'conceded': 'int', 'economy': 'float'}
-    tempbowlingdf2 = second_innings_bowling_top5[['player_name', 'overs', 'wickets', 'conceded', 'economy']]
-    tempbowlingdf2 = tempbowlingdf2.astype(column_bowling_dtypes)
-    st.table(tempbowlingdf2.reset_index(drop=True))
+        #Second Innings Bowling
+        second_innings_bowling_top5 = bowling[(bowling['innings'] == 2) & (bowling['wickets'] != 0)].sort_values(by=['wickets', 'economy'],ascending=[False, True]).head(5)
+        fig, ax = plt.subplots(figsize=(12, 8))  # Increase figure size
+        labels = [f"{player['player_name']} ({int(player['wickets'])}/{int(player['conceded'])})" for _, player in
+                  second_innings_bowling_top5.iterrows()]
+        wedges, texts, autotexts = ax.pie(second_innings_bowling_top5['wickets'], labels=labels, startangle=90, autopct='',
+                                          pctdistance=0.85, colors=sns.color_palette('viridis'))
+        plt.title('Top Bowlers in 2nd Innings')
+        st.pyplot(fig)
+    
+        column_bowling_dtypes = {'overs': 'float', 'wickets': 'int', 'conceded': 'int', 'economy': 'float'}
+        tempbowlingdf2 = second_innings_bowling_top5[['player_name', 'overs', 'wickets', 'conceded', 'economy']]
+        tempbowlingdf2 = tempbowlingdf2.astype(column_bowling_dtypes)
+        st.table(tempbowlingdf2.reset_index(drop=True))
 
     tempballbyball, tempresult = helper.match_scorecard_line(results, deliveries, selected_match, selected_season)
     fig, ax = plt.subplots(figsize=(10, 6))
