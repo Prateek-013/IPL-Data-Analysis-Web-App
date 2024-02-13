@@ -771,8 +771,8 @@ if user_menu == 'Player Analysis':
     
             st.table(worstbatsman)
             st.write('Atleast 4 overs bowled*')
-        except:
-            st.write("Not enough Data to show Bowling Statistics and Visualizations")
+        except KeyError:
+            st.write("Not enough Data to show Bowling Statistics and Visualizations.")
 
 if user_menu == 'IPL Records':
     selected_option = st.sidebar.selectbox('Select an Option', ['Batting', 'Bowling'])
