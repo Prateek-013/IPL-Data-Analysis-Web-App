@@ -396,377 +396,383 @@ if user_menu == 'Player Analysis':
         st.table(stint)
 
     if selected_about == 'Batting':
-        careerruns, oppruns, stadiumruns, highscore, bataverage, batstrikerate, scores30, scores50, scores100, orangecaps, careerhighscore, innings, image = helper.player_batting(results, battingcard, players, deliveries,bowlingcard, selected_player)
-        centered_text = f"<h1 style='text-align: center;'>Batting Statistics of {selected_player}</h1>"
-        st.markdown(centered_text, unsafe_allow_html=True)
-        centered_image_html = f"<div style='display: flex; justify-content: center;'><img src='{image}' width='300'></div>"
-        st.markdown(centered_image_html, unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        col1,col2,col3 = st.columns(3)
-
-        with col1:
-            st.subheader('Innings Played')
-            st.markdown(f"<p style='font-size:20px;'>{innings}</p>", unsafe_allow_html=True)
+        try:
+            careerruns, oppruns, stadiumruns, highscore, bataverage, batstrikerate, scores30, scores50, scores100, orangecaps, careerhighscore, innings, image = helper.player_batting(results, battingcard, players, deliveries,bowlingcard, selected_player)
+            centered_text = f"<h1 style='text-align: center;'>Batting Statistics of {selected_player}</h1>"
+            st.markdown(centered_text, unsafe_allow_html=True)
+            centered_image_html = f"<div style='display: flex; justify-content: center;'><img src='{image}' width='300'></div>"
+            st.markdown(centered_image_html, unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
+            col1,col2,col3 = st.columns(3)
+    
+            with col1:
+                st.subheader('Innings Played')
+                st.markdown(f"<p style='font-size:20px;'>{innings}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
+                st.subheader('Batting Average')
+                st.markdown(f"<p style='font-size:20px;'>{bataverage}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
+                st.subheader('30+ Scores')
+                st.markdown(f"<p style='font-size:20px;'>{scores30}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
 
-            st.subheader('Batting Average')
-            st.markdown(f"<p style='font-size:20px;'>{bataverage}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
+            with col2:
+                st.subheader('Best Innings')
+                st.markdown(f"<p style='font-size:20px;'>{highscore}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
+                st.subheader('Batting Strike Rate')
+                st.markdown(f"<p style='font-size:20px;'>{batstrikerate}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
+                st.subheader('Half Centuries')
+                st.markdown(f"<p style='font-size:20px;'>{scores50}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
+            with col3:
+                st.subheader('Best Season')
+                st.markdown(f"<p style='font-size:20px;'>{careerhighscore} runs</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
+                st.subheader('Orange Caps')
+                st.markdown(f"<p style='font-size:20px;'>{orangecaps}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
+                st.subheader('Centuries')
+                st.markdown(f"<p style='font-size:20px;'>{scores100}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
 
-            st.subheader('30+ Scores')
-            st.markdown(f"<p style='font-size:20px;'>{scores30}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-        with col2:
-            st.subheader('Best Innings')
-            st.markdown(f"<p style='font-size:20px;'>{highscore}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-            st.subheader('Batting Strike Rate')
-            st.markdown(f"<p style='font-size:20px;'>{batstrikerate}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-            st.subheader('Half Centuries')
-            st.markdown(f"<p style='font-size:20px;'>{scores50}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-        with col3:
-            st.subheader('Best Season')
-            st.markdown(f"<p style='font-size:20px;'>{careerhighscore} runs</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-            st.subheader('Orange Caps')
-            st.markdown(f"<p style='font-size:20px;'>{orangecaps}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-            st.subheader('Centuries')
-            st.markdown(f"<p style='font-size:20px;'>{scores100}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        centered_text = f"<h2 style='text-align: center;'>Runs Throughout Their IPL Career</h2>"
-        st.markdown(centered_text, unsafe_allow_html=True)
-        st.table(careerruns)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        centered_text = f"<h2 style='text-align: center;'>Runs Scored Against Opponents</h2>"
-        st.markdown(centered_text, unsafe_allow_html=True)
-        st.table(oppruns)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        centered_text = f"<h2 style='text-align: center;'>Runs Scored in Different Stadiums</h2>"
-        st.markdown(centered_text, unsafe_allow_html=True)
-        st.table(stadiumruns)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        tempbowltype, tempstrike, tempinnings, temppivot, tempkde, tempdismissals =helper.player_batting_viz(deliveries, players, battingcard, selected_player)
-        centered_text = f"<h2 style='text-align: center;'>Batting Analysis of {selected_player}</h2>"
-        st.markdown(centered_text, unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        fig = make_subplots(rows=2, cols=2,
-                            subplot_titles=['Performance against Bowling Styles', 'Strike Rate Throughout the Innings',
-                                            'Performance in Different Situations of the Match',
-                                            'Relation Between Strike Rate and Runs'])
-
-        # Subplot 1: Performance vs Bowling Styles (Bar Chart)
-        trace1 = go.Bar(x=tempbowltype['bowling_style'], y=tempbowltype['average runs'], name='Average Runs',
-                        marker=dict(color='blue'))
-        trace2 = go.Bar(x=tempbowltype['bowling_style'], y=tempbowltype['strike rate'], name='Strike Rate',
-                        marker=dict(color='green'))
-        tracen = go.Bar(x=tempbowltype['bowling_style'], y=tempbowltype['dismissals'], name='Dismissals',
-                        marker=dict(color='red'))
-        fig.add_trace(trace1, row=1, col=1)
-        fig.add_trace(trace2, row=1, col=1)
-        fig.add_trace(tracen, row=1, col=1)
-        fig.update_xaxes(title_text='Bowling Style', row=1, col=1)
-        fig.update_yaxes(title_text='Average Runs / Strike Rate', row=1, col=1)
-
-        # Subplot 2: Strike Rate throughout the innings (Line plot)
-        trace3 = go.Scatter(x=tempstrike['balls_range'], y=tempstrike['strike rate'], mode='lines+markers',
-                            name='Strike Rate', line=dict(color='red'))
-        fig.add_trace(trace3, row=1, col=2)
-        fig.update_xaxes(title_text='Balls Played', row=1, col=2)
-        fig.update_yaxes(title_text='Strike Rate', row=1, col=2)
-
-        # Subplot 4: Heatmap for player performance in powerplay, middle overs and death overs
-        trace5 = go.Heatmap(z=temppivot.values, x=temppivot.columns, y=temppivot.index, colorscale='Viridis',
-                            texttemplate="%{z}", hoverinfo='text')
-        fig.add_trace(trace5, row=2, col=1)
-        fig.update_xaxes(title_text='Outcome of the ball bowled', row=2, col=1)
-        fig.update_yaxes(title_text='Over Situation', row=2, col=1)
-
-        # Subplot 5: 2d kde plot (x='batsman_runs', y='strike rate') bivariate kde plot
-        trace6 = go.Scatter(x=tempkde['batsman_runs'], y=tempkde['strike rate'], mode='markers',
-                            name='Bivariate KDE Plot', marker=dict(color='purple'))
-        fig.add_trace(trace6, row=2, col=2)
-        fig.update_xaxes(title_text='Batsman Runs', row=2, col=2)
-        fig.update_yaxes(title_text='Strike Rate', row=2, col=2)
-
-        # Update layout
-        fig.update_layout(height=1000, width=1500, title_text='')
-
-        # Show the figure
-        st.plotly_chart(fig)
-
-        fig = make_subplots(rows=1, cols=2, subplot_titles=["Distribution of the Player's Innings",
-                                                            "Distribution of Types of Dismissals"],
-                            specs=[[{"type": "pie"}, {"type": "pie"}]])
-        trace4 = go.Pie(values=tempinnings['batsman_runs'], labels=tempinnings['ball_outcome'])
-        fig.add_trace(trace4, row=1, col=1)
-        trace7 = go.Pie(values=tempdismissals['match_id'], labels=tempdismissals['wickettype'])
-        fig.add_trace(trace7, row=1, col=2)
-        fig.update_layout(title="",height=500, width=1500)
-        st.plotly_chart(fig)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        centered_text = f"<h2 style='text-align: center;'>{selected_player}'s Favourite Bowlers to Face</h2>"
-        st.markdown(centered_text, unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        sort_by = st.selectbox('Sort Bowlers By', ['strike rate', 'batsman_runs', 'average'])
-        favbowlerfull, favbowlertop3 = helper.favbowler(deliveries, players, selected_player, sort_by)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        col1,col2,col3 = st.columns(3)
-
-        with col1:
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
-            st.subheader(f"{favbowlertop3['bowler_name'][1]}")
-            st.image(f"{favbowlertop3['image_url'][1]}", width=150)
-
-        with col2:
-            st.subheader(f"{favbowlertop3['bowler_name'][0]}")
-            st.image(f"{favbowlertop3['image_url'][0]}", width=150)
-
-        with col3:
+            centered_text = f"<h2 style='text-align: center;'>Runs Throughout Their IPL Career</h2>"
+            st.markdown(centered_text, unsafe_allow_html=True)
+            st.table(careerruns)
+    
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
-            st.subheader(f"{favbowlertop3['bowler_name'][2]}")
-            st.image(f"{favbowlertop3['image_url'][2]}", width=150)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.table(favbowlerfull)
-        st.write("Atleast 4 overs bowled to the batsman*")
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        centered_text = f"<h2 style='text-align: center;'>{selected_player}'s  Least Favourite Bowlers to Face</h2>"
-        st.markdown(centered_text, unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        sort_by2 = st.selectbox('Sort Bowlers By', ['dismissals','strike rate', 'batsman_runs', 'average'])
-        worstbowlerfull, worsbowlertop3 = helper.worstbowler(deliveries, players, selected_player, sort_by2)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        col1, col2, col3 = st.columns(3)
-
-        with col1:
+            centered_text = f"<h2 style='text-align: center;'>Runs Scored Against Opponents</h2>"
+            st.markdown(centered_text, unsafe_allow_html=True)
+            st.table(oppruns)
+    
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
-            st.subheader(f"{worsbowlertop3['bowler_name'][1]}")
-            st.image(f"{worsbowlertop3['image_url'][1]}", width=150)
-
-        with col2:
-            st.subheader(f"{worsbowlertop3['bowler_name'][0]}")
-            st.image(f"{worsbowlertop3['image_url'][0]}", width=150)
-
-        with col3:
+            centered_text = f"<h2 style='text-align: center;'>Runs Scored in Different Stadiums</h2>"
+            st.markdown(centered_text, unsafe_allow_html=True)
+            st.table(stadiumruns)
+    
+            st.markdown("<br>", unsafe_allow_html=True)
+    
+            tempbowltype, tempstrike, tempinnings, temppivot, tempkde, tempdismissals =helper.player_batting_viz(deliveries, players, battingcard, selected_player)
+            centered_text = f"<h2 style='text-align: center;'>Batting Analysis of {selected_player}</h2>"
+            st.markdown(centered_text, unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
-            st.subheader(f"{worsbowlertop3['bowler_name'][2]}")
-            st.image(f"{worsbowlertop3['image_url'][2]}", width=150)
+    
+            fig = make_subplots(rows=2, cols=2,
+                                subplot_titles=['Performance against Bowling Styles', 'Strike Rate Throughout the Innings',
+                                                'Performance in Different Situations of the Match',
+                                                'Relation Between Strike Rate and Runs'])
+    
+            # Subplot 1: Performance vs Bowling Styles (Bar Chart)
+            trace1 = go.Bar(x=tempbowltype['bowling_style'], y=tempbowltype['average runs'], name='Average Runs',
+                            marker=dict(color='blue'))
+            trace2 = go.Bar(x=tempbowltype['bowling_style'], y=tempbowltype['strike rate'], name='Strike Rate',
+                            marker=dict(color='green'))
+            tracen = go.Bar(x=tempbowltype['bowling_style'], y=tempbowltype['dismissals'], name='Dismissals',
+                            marker=dict(color='red'))
+            fig.add_trace(trace1, row=1, col=1)
+            fig.add_trace(trace2, row=1, col=1)
+            fig.add_trace(tracen, row=1, col=1)
+            fig.update_xaxes(title_text='Bowling Style', row=1, col=1)
+            fig.update_yaxes(title_text='Average Runs / Strike Rate', row=1, col=1)
+    
+            # Subplot 2: Strike Rate throughout the innings (Line plot)
+            trace3 = go.Scatter(x=tempstrike['balls_range'], y=tempstrike['strike rate'], mode='lines+markers',
+                                name='Strike Rate', line=dict(color='red'))
+            fig.add_trace(trace3, row=1, col=2)
+            fig.update_xaxes(title_text='Balls Played', row=1, col=2)
+            fig.update_yaxes(title_text='Strike Rate', row=1, col=2)
+    
+            # Subplot 4: Heatmap for player performance in powerplay, middle overs and death overs
+            trace5 = go.Heatmap(z=temppivot.values, x=temppivot.columns, y=temppivot.index, colorscale='Viridis',
+                                texttemplate="%{z}", hoverinfo='text')
+            fig.add_trace(trace5, row=2, col=1)
+            fig.update_xaxes(title_text='Outcome of the ball bowled', row=2, col=1)
+            fig.update_yaxes(title_text='Over Situation', row=2, col=1)
+    
+            # Subplot 5: 2d kde plot (x='batsman_runs', y='strike rate') bivariate kde plot
+            trace6 = go.Scatter(x=tempkde['batsman_runs'], y=tempkde['strike rate'], mode='markers',
+                                name='Bivariate KDE Plot', marker=dict(color='purple'))
+            fig.add_trace(trace6, row=2, col=2)
+            fig.update_xaxes(title_text='Batsman Runs', row=2, col=2)
+            fig.update_yaxes(title_text='Strike Rate', row=2, col=2)
+    
+            # Update layout
+            fig.update_layout(height=1000, width=1500, title_text='')
+    
+            # Show the figure
+            st.plotly_chart(fig)
 
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.table(worstbowlerfull)
-        st.write("Atleast 4 overs bowled to the batsman*")
+            fig = make_subplots(rows=1, cols=2, subplot_titles=["Distribution of the Player's Innings",
+                                                                "Distribution of Types of Dismissals"],
+                                specs=[[{"type": "pie"}, {"type": "pie"}]])
+            trace4 = go.Pie(values=tempinnings['batsman_runs'], labels=tempinnings['ball_outcome'])
+            fig.add_trace(trace4, row=1, col=1)
+            trace7 = go.Pie(values=tempdismissals['match_id'], labels=tempdismissals['wickettype'])
+            fig.add_trace(trace7, row=1, col=2)
+            fig.update_layout(title="",height=500, width=1500)
+            st.plotly_chart(fig)
+    
+            st.markdown("<br>", unsafe_allow_html=True)
+            centered_text = f"<h2 style='text-align: center;'>{selected_player}'s Favourite Bowlers to Face</h2>"
+            st.markdown(centered_text, unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
+    
+            sort_by = st.selectbox('Sort Bowlers By', ['strike rate', 'batsman_runs', 'average'])
+            favbowlerfull, favbowlertop3 = helper.favbowler(deliveries, players, selected_player, sort_by)
+    
+            st.markdown("<br>", unsafe_allow_html=True)
+    
+            col1,col2,col3 = st.columns(3)
+
+            with col1:
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.subheader(f"{favbowlertop3['bowler_name'][1]}")
+                st.image(f"{favbowlertop3['image_url'][1]}", width=150)
+    
+            with col2:
+                st.subheader(f"{favbowlertop3['bowler_name'][0]}")
+                st.image(f"{favbowlertop3['image_url'][0]}", width=150)
+    
+            with col3:
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.subheader(f"{favbowlertop3['bowler_name'][2]}")
+                st.image(f"{favbowlertop3['image_url'][2]}", width=150)
+    
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.table(favbowlerfull)
+            st.write("Atleast 4 overs bowled to the batsman*")
+    
+            st.markdown("<br>", unsafe_allow_html=True)
+            centered_text = f"<h2 style='text-align: center;'>{selected_player}'s  Least Favourite Bowlers to Face</h2>"
+            st.markdown(centered_text, unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
+
+            sort_by2 = st.selectbox('Sort Bowlers By', ['dismissals','strike rate', 'batsman_runs', 'average'])
+            worstbowlerfull, worsbowlertop3 = helper.worstbowler(deliveries, players, selected_player, sort_by2)
+    
+            st.markdown("<br>", unsafe_allow_html=True)
+    
+            col1, col2, col3 = st.columns(3)
+    
+            with col1:
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.subheader(f"{worsbowlertop3['bowler_name'][1]}")
+                st.image(f"{worsbowlertop3['image_url'][1]}", width=150)
+    
+            with col2:
+                st.subheader(f"{worsbowlertop3['bowler_name'][0]}")
+                st.image(f"{worsbowlertop3['image_url'][0]}", width=150)
+    
+            with col3:
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.subheader(f"{worsbowlertop3['bowler_name'][2]}")
+                st.image(f"{worsbowlertop3['image_url'][2]}", width=150)
+    
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.table(worstbowlerfull)
+            st.write("Atleast 4 overs bowled to the batsman*")
+        except:
+            st.write("Not enough Data to show further Statistics and Visualizations")
 
     if selected_about == 'Bowling':
-        seasonbowl, performopp, performvenue, innings, wickets, economy, average, strike_rate, wickets3, wickets5, bowlhighscore, purplecap = helper.player_bowling_stats(bowlingcard,players,results, selected_player)
-        image = players[players['player_name'] == selected_player].reset_index(drop=True)['image_url'][0]
-
-        centered_text = f"<h1 style='text-align: center;'>Bowling Statistics of {selected_player}</h1>"
-        st.markdown(centered_text, unsafe_allow_html=True)
-        centered_image_html = f"<div style='display: flex; justify-content: center;'><img src='{image}' width='300'></div>"
-        st.markdown(centered_image_html, unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        col1, col2, col3 = st.columns(3)
-
-        with col1:
-            st.subheader('Matches Played')
-            st.markdown(f"<p style='font-size:20px;'>{innings}</p>", unsafe_allow_html=True)
+        try:
+            seasonbowl, performopp, performvenue, innings, wickets, economy, average, strike_rate, wickets3, wickets5, bowlhighscore, purplecap = helper.player_bowling_stats(bowlingcard,players,results, selected_player)
+            image = players[players['player_name'] == selected_player].reset_index(drop=True)['image_url'][0]
+    
+            centered_text = f"<h1 style='text-align: center;'>Bowling Statistics of {selected_player}</h1>"
+            st.markdown(centered_text, unsafe_allow_html=True)
+            centered_image_html = f"<div style='display: flex; justify-content: center;'><img src='{image}' width='300'></div>"
+            st.markdown(centered_image_html, unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
+            col1, col2, col3 = st.columns(3)
+    
+            with col1:
+                st.subheader('Matches Played')
+                st.markdown(f"<p style='font-size:20px;'>{innings}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
+                st.subheader('Total Wickets')
+                st.markdown(f"<p style='font-size:20px;'>{wickets}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
+                st.subheader('Overall Average')
+                st.markdown(f"<p style='font-size:20px;'>{average}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
+            with col2:
+                st.subheader('Best Figures')
+                st.markdown(f"<p style='font-size:20px;'>{bowlhighscore}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
+                st.subheader('3 Wicket Hauls')
+                st.markdown(f"<p style='font-size:20px;'>{wickets3}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
+                st.subheader('Overall Strike Rate')
+                st.markdown(f"<p style='font-size:20px;'>{strike_rate}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
 
-            st.subheader('Total Wickets')
-            st.markdown(f"<p style='font-size:20px;'>{wickets}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-            st.subheader('Overall Average')
-            st.markdown(f"<p style='font-size:20px;'>{average}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-        with col2:
-            st.subheader('Best Figures')
-            st.markdown(f"<p style='font-size:20px;'>{bowlhighscore}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-            st.subheader('3 Wicket Hauls')
-            st.markdown(f"<p style='font-size:20px;'>{wickets3}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-            st.subheader('Overall Strike Rate')
-            st.markdown(f"<p style='font-size:20px;'>{strike_rate}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-        with col3:
-            st.subheader('Purple Caps')
-            st.markdown(f"<p style='font-size:20px;'>{purplecap}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-            st.subheader('5 Wicket Hauls')
-            st.markdown(f"<p style='font-size:20px;'>{wickets5}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-            st.subheader('Economy')
-            st.markdown(f"<p style='font-size:20px;'>{economy}</p>", unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        centered_text = f"<h2 style='text-align: center;'>Performance Throughout The Career</h2>"
-        st.markdown(centered_text, unsafe_allow_html=True)
-        st.table(seasonbowl)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        centered_text = f"<h2 style='text-align: center;'>Performance Against Different Opponents</h2>"
-        st.markdown(centered_text, unsafe_allow_html=True)
-        st.table(performopp)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        centered_text = f"<h2 style='text-align: center;'>Performance in Different Stadiums</h2>"
-        st.markdown(centered_text, unsafe_allow_html=True)
-        st.table(performvenue)
-
-        bowlerdf, economydf, heatmapdf, wicketdf,piewickets, pieoutcome = helper.player_bowling_viz1(deliveries,players, selected_player, battingcard)
-
-        fig = make_subplots(rows=2, cols=2,
-                            subplot_titles=['Performance against Bowling Styles', 'Economy in Different Overs of the Match',
-                                            'Performance in Different Situations of the Match',
-                                            'Relationship Between Wickets Taken and Over of the Match'])
-
-        trace1 = go.Bar(x=bowlerdf['batting_style'], y=bowlerdf['wickets'], name='Wickets', marker=dict(color='blue'))
-        trace2 = go.Bar(x=bowlerdf['batting_style'], y=bowlerdf['economy'], name='Economy', marker=dict(color='green'))
-        fig.add_trace(trace1, row=1, col=1)
-        fig.add_trace(trace2, row=1, col=1)
-        fig.update_xaxes(title_text='Batting Style', row=1, col=1)
-        fig.update_yaxes(title_text='Wickets / Economy', row=1, col=1)
-
-        trace3 = go.Scatter(x=economydf['over_number'], y=economydf['economy'], mode='lines+markers', name='Economy',
-                            line=dict(color='red'))
-        fig.add_trace(trace3, row=1, col=2)
-        fig.update_xaxes(title_text='Over Number', row=1, col=2)
-        fig.update_yaxes(title_text='Economy', row=1, col=2)
-
-        trace5 = go.Heatmap(z=heatmapdf.values, x=heatmapdf.columns, y=heatmapdf.index, colorscale='Viridis',
-                            texttemplate="%{z}", hoverinfo='text')
-        fig.add_trace(trace5, row=2, col=1)
-        fig.update_xaxes(title_text='Ball Outcome', row=2, col=1)
-        fig.update_yaxes(title_text='Over Situation', row=2, col=1)
-
-        trace6 = go.Scatter(x=wicketdf['over_number'], y=wicketdf['wickets'], mode='markers',
-                            marker=dict(size=wicketdf['wickets']*1.5, color='blue'), name='Wickets')
-
-        fig.add_trace(trace6, row=2, col=2)
-        fig.update_xaxes(title_text='Over Number', row=2, col=2)
-        fig.update_yaxes(title_text='Wickets', row=2, col=2)
-
-        fig.update_layout(height=1000, width=1500, title_text=' ')
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        centered_text = f"<h2 style='text-align: center;'>Bowling Analysis of {selected_player}</h2>"
-        st.markdown(centered_text, unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.plotly_chart(fig)
-
-        fig = make_subplots(rows=1, cols=2, subplot_titles=["Distribution of Types of Wickets",
-                                                            "Distribution of Delivery Outcomes"],
-                            specs=[[{"type": "pie"}, {"type": "pie"}]])
-
-        trace4 = go.Pie(values=piewickets['isout'], labels=piewickets['wickettype'])
-        fig.add_trace(trace4, row=1, col=1)
-        trace7 = go.Pie(values=pieoutcome['batsman_runs'], labels=pieoutcome['ball_outcome'])
-        fig.add_trace(trace7, row=1, col=2)
-        fig.update_layout(title="", height=500, width=1500)
-        st.plotly_chart(fig)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        centered_text = f"<h2 style='text-align: center;'>{selected_player}'s Favourite Batsmen to Bowl to</h2>"
-        st.markdown(centered_text, unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        selected_sort = st.selectbox('Sort Batsmen By', ['wickets', 'batsman runs', 'economy', 'average', 'strike rate'])
-        favbatsman, favbat3 = helper.favbatsman(deliveries, players, selected_player, selected_sort)
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        col1, col2, col3 = st.columns(3)
-
-        with col1:
+            with col3:
+                st.subheader('Purple Caps')
+                st.markdown(f"<p style='font-size:20px;'>{purplecap}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
+                st.subheader('5 Wicket Hauls')
+                st.markdown(f"<p style='font-size:20px;'>{wickets5}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
+                st.subheader('Economy')
+                st.markdown(f"<p style='font-size:20px;'>{economy}</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+    
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
-            st.subheader(f"{favbat3['batsman name'][1]}")
-            st.image(f"{favbat3['image_url'][1]}", width=150)
-
-        with col2:
-            st.subheader(f"{favbat3['batsman name'][0]}")
-            st.image(f"{favbat3['image_url'][0]}", width=150)
-
-        with col3:
+            centered_text = f"<h2 style='text-align: center;'>Performance Throughout The Career</h2>"
+            st.markdown(centered_text, unsafe_allow_html=True)
+            st.table(seasonbowl)
+    
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
-            st.subheader(f"{favbat3['batsman name'][2]}")
-            st.image(f"{favbat3['image_url'][2]}", width=150)
+            centered_text = f"<h2 style='text-align: center;'>Performance Against Different Opponents</h2>"
+            st.markdown(centered_text, unsafe_allow_html=True)
+            st.table(performopp)
 
-        st.table(favbatsman)
-        st.write('Atleast 4 overs bowled*')
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        centered_text = f"<h2 style='text-align: center;'>{selected_player}'s Least Favourite Batsmen to Bowl to</h2>"
-        st.markdown(centered_text, unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        sort_by3 = st.selectbox('Sort Batsmen By', ['wickets', 'economy', 'average', 'strike rate'])
-        worstbatsman, worstbat3 = helper.worstbatsman(deliveries, players, selected_player, sort_by3)
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        col1, col2, col3 = st.columns(3)
-
-        with col1:
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
-            st.subheader(f"{worstbat3['batsman name'][1]}")
-            st.image(f"{worstbat3['image_url'][1]}", width=150)
+            centered_text = f"<h2 style='text-align: center;'>Performance in Different Stadiums</h2>"
+            st.markdown(centered_text, unsafe_allow_html=True)
+            st.table(performvenue)
+    
+            bowlerdf, economydf, heatmapdf, wicketdf,piewickets, pieoutcome = helper.player_bowling_viz1(deliveries,players, selected_player, battingcard)
+    
+            fig = make_subplots(rows=2, cols=2,
+                                subplot_titles=['Performance against Bowling Styles', 'Economy in Different Overs of the Match',
+                                                'Performance in Different Situations of the Match',
+                                                'Relationship Between Wickets Taken and Over of the Match'])
+    
+            trace1 = go.Bar(x=bowlerdf['batting_style'], y=bowlerdf['wickets'], name='Wickets', marker=dict(color='blue'))
+            trace2 = go.Bar(x=bowlerdf['batting_style'], y=bowlerdf['economy'], name='Economy', marker=dict(color='green'))
+            fig.add_trace(trace1, row=1, col=1)
+            fig.add_trace(trace2, row=1, col=1)
+            fig.update_xaxes(title_text='Batting Style', row=1, col=1)
+            fig.update_yaxes(title_text='Wickets / Economy', row=1, col=1)
+    
+            trace3 = go.Scatter(x=economydf['over_number'], y=economydf['economy'], mode='lines+markers', name='Economy',
+                                line=dict(color='red'))
+            fig.add_trace(trace3, row=1, col=2)
+            fig.update_xaxes(title_text='Over Number', row=1, col=2)
+            fig.update_yaxes(title_text='Economy', row=1, col=2)
 
-        with col2:
-            st.subheader(f"{worstbat3['batsman name'][0]}")
-            st.image(f"{worstbat3['image_url'][0]}", width=150)
-
-        with col3:
+            trace5 = go.Heatmap(z=heatmapdf.values, x=heatmapdf.columns, y=heatmapdf.index, colorscale='Viridis',
+                                texttemplate="%{z}", hoverinfo='text')
+            fig.add_trace(trace5, row=2, col=1)
+            fig.update_xaxes(title_text='Ball Outcome', row=2, col=1)
+            fig.update_yaxes(title_text='Over Situation', row=2, col=1)
+    
+            trace6 = go.Scatter(x=wicketdf['over_number'], y=wicketdf['wickets'], mode='markers',
+                                marker=dict(size=wicketdf['wickets']*1.5, color='blue'), name='Wickets')
+    
+            fig.add_trace(trace6, row=2, col=2)
+            fig.update_xaxes(title_text='Over Number', row=2, col=2)
+            fig.update_yaxes(title_text='Wickets', row=2, col=2)
+    
+            fig.update_layout(height=1000, width=1500, title_text=' ')
+    
             st.markdown("<br>", unsafe_allow_html=True)
+            centered_text = f"<h2 style='text-align: center;'>Bowling Analysis of {selected_player}</h2>"
+            st.markdown(centered_text, unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
-            st.subheader(f"{worstbat3['batsman name'][2]}")
-            st.image(f"{worstbat3['image_url'][2]}", width=150)
+            st.plotly_chart(fig)
 
-        st.table(worstbatsman)
-        st.write('Atleast 4 overs bowled*')
+            fig = make_subplots(rows=1, cols=2, subplot_titles=["Distribution of Types of Wickets",
+                                                                "Distribution of Delivery Outcomes"],
+                                specs=[[{"type": "pie"}, {"type": "pie"}]])
+    
+            trace4 = go.Pie(values=piewickets['isout'], labels=piewickets['wickettype'])
+            fig.add_trace(trace4, row=1, col=1)
+            trace7 = go.Pie(values=pieoutcome['batsman_runs'], labels=pieoutcome['ball_outcome'])
+            fig.add_trace(trace7, row=1, col=2)
+            fig.update_layout(title="", height=500, width=1500)
+            st.plotly_chart(fig)
+    
+            st.markdown("<br>", unsafe_allow_html=True)
+            centered_text = f"<h2 style='text-align: center;'>{selected_player}'s Favourite Batsmen to Bowl to</h2>"
+            st.markdown(centered_text, unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
+            selected_sort = st.selectbox('Sort Batsmen By', ['wickets', 'batsman runs', 'economy', 'average', 'strike rate'])
+            favbatsman, favbat3 = helper.favbatsman(deliveries, players, selected_player, selected_sort)
+            st.markdown("<br>", unsafe_allow_html=True)
+    
+            col1, col2, col3 = st.columns(3)
+    
+            with col1:
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.subheader(f"{favbat3['batsman name'][1]}")
+                st.image(f"{favbat3['image_url'][1]}", width=150)
+    
+            with col2:
+                st.subheader(f"{favbat3['batsman name'][0]}")
+                st.image(f"{favbat3['image_url'][0]}", width=150)
+    
+            with col3:
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.subheader(f"{favbat3['batsman name'][2]}")
+                st.image(f"{favbat3['image_url'][2]}", width=150)
+    
+            st.table(favbatsman)
+            st.write('Atleast 4 overs bowled*')
+    
+            st.markdown("<br>", unsafe_allow_html=True)
+            centered_text = f"<h2 style='text-align: center;'>{selected_player}'s Least Favourite Batsmen to Bowl to</h2>"
+            st.markdown(centered_text, unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
+            sort_by3 = st.selectbox('Sort Batsmen By', ['wickets', 'economy', 'average', 'strike rate'])
+            worstbatsman, worstbat3 = helper.worstbatsman(deliveries, players, selected_player, sort_by3)
+            st.markdown("<br>", unsafe_allow_html=True)
+    
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.subheader(f"{worstbat3['batsman name'][1]}")
+                st.image(f"{worstbat3['image_url'][1]}", width=150)
+    
+            with col2:
+                st.subheader(f"{worstbat3['batsman name'][0]}")
+                st.image(f"{worstbat3['image_url'][0]}", width=150)
+    
+            with col3:
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.subheader(f"{worstbat3['batsman name'][2]}")
+                st.image(f"{worstbat3['image_url'][2]}", width=150)
+    
+            st.table(worstbatsman)
+            st.write('Atleast 4 overs bowled*')
+        except:
+            st.write("Not enough Data to show Bowling Statistics and Visualizations")
 
 if user_menu == 'IPL Records':
     selected_option = st.sidebar.selectbox('Select an Option', ['Batting', 'Bowling'])
