@@ -6,11 +6,17 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import plotly.subplots as sp
 from plotly.subplots import make_subplots
-from scikit-learn.model_selection import train_test_split
-from scikit-learn.compose import ColumnTransformer
-from scikit-learn.preprocessing import OneHotEncoder
-from scikit-learn.linear_model import LogisticRegression
-from scikit-learn.pipeline import Pipeline
+# from scikit-learn.model_selection import train_test_split
+# from scikit-learn.compose import ColumnTransformer
+# from scikit-learn.preprocessing import OneHotEncoder
+# from scikit-learn.linear_model import LogisticRegression
+# from scikit-learn.pipeline import Pipeline
+
+from sklearn.model_selection import train_test_split
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
 
 results = pd.read_csv(r'https://raw.githubusercontent.com/Prateek-013/IPL-Data-Analysis-Web-App/main/results.csv')
 deliveries = pd.read_csv(r'https://raw.githubusercontent.com/Prateek-013/IPL-Data-Analysis-Web-App/main/ipl_ball_by_ball_data.csv')
