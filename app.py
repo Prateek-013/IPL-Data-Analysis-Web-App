@@ -1180,7 +1180,7 @@ if user_menu == '2024 Predictions':
        'Durban', 'Centurion', 'East London', 'Johannesburg', 'Kimberley', 'Cuttack', 'Ahmedabad', 'Nagpur', 'Dharamsala', 'Visakhapatnam',
        'Ranchi', 'Delhi', 'Abu Dhabi', 'Dubai', 'Sharjah', 'Pune', 'Indore', 'Guwahati', 'Lucknow']
 
-    pipe = pickle.load(open('pipe.pkl', 'rb'))
+    # pipe = pickle.load(open('pipe.pkl', 'rb'))
 
     if selected_option == '1st Innings: Predicted Score':
         st.markdown("<h1 style='text-align: center;'>1st Innings Score Predictor</h1>",
