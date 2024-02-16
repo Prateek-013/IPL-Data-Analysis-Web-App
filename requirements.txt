@@ -4,3 +4,4 @@ seaborn
 pandas
 numpy
 matplotlib
+sklearn
