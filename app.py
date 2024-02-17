@@ -1187,6 +1187,28 @@ if user_menu == '2024 Predictions':
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
 
+        col1, col2 = st.columns(2)
+        with col1:
+            batting_team = st.selectbox('Select Batting Team', sorted(teams))
+
+        with col2:
+            bowling_team = st.selectbox('Select Bowling Team', sorted(teams))
+
+        city = st.selectbox('Select Match Venue', sorted(cities))
+
+        col3, col4, col5 = st.columns(3)
+
+        with col3:
+            current_score = st.number_input('Current Score')
+
+        with col4:
+            overs_done = st.number_input('Overs Played (Works for over > 5')
+
+        with col5:
+            wickets = st.number_input('Wickets')
+
+        last_five = st.number_input('Runs Scored in Last Five Overs')
+
         deliveries_df = results[['match_id', 'team1_name', 'team2_name', 'match_venue_city']].merge(
             deliveries[deliveries['innings_no'] == 1], on='match_id').rename(
             columns={'team1_name': 'batting_team', 'team2_name': 'bowling_team'})
@@ -1216,28 +1238,6 @@ if user_menu == '2024 Predictions':
             ('step3', XGBRegressor(n_estimators=1000, learning_rate=0.2, max_depth=12, random_state=1))
         ])
         pipe.fit(X_train, y_train)
-
-        col1, col2 = st.columns(2)
-        with col1:
-            batting_team = st.selectbox('Select Batting Team', sorted(teams))
-
-        with col2:
-            bowling_team = st.selectbox('Select Bowling Team', sorted(teams))
-
-        city = st.selectbox('Select Match Venue', sorted(cities))
-
-        col3, col4, col5 = st.columns(3)
-
-        with col3:
-            current_score = st.number_input('Current Score')
-
-        with col4:
-            overs_done = st.number_input('Overs Played (Works for over > 5')
-
-        with col5:
-            wickets = st.number_input('Wickets')
-
-        last_five = st.number_input('Runs Scored in Last Five Overs')
         
         if st.button('Predict Projected Score'):
             wickets_left = 10 - wickets
