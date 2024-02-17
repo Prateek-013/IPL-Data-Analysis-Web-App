@@ -1194,7 +1194,8 @@ if user_menu == '2024 Predictions':
             batting_team = st.selectbox('Select Batting Team', sorted(teams))
 
         with col2:
-            bowling_team = st.selectbox('Select Bowling Team', sorted(teams))
+            eligible_teams = sorted(set(teams) - {batting_team})
+            bowling_team = st.selectbox('Select Bowling Team', sorted(eligible_teams))
 
         city = st.selectbox('Select Match Venue', sorted(cities))
 
@@ -1320,7 +1321,8 @@ if user_menu == '2024 Predictions':
         with col1:
             batting_team = st.selectbox('Select the Batting Team', sorted(teams))
         with col2:
-            bowling_team = st.selectbox('Select the Bowling Team', sorted(teams))
+            eligible_teams = sorted(set(teams) - {batting_team})
+            bowling_team = st.selectbox('Select the Bowling Team', sorted(eligible_teams))
 
         selected_city = st.selectbox("Select Match Venue City", sorted(cities))
         target = st.number_input('Target')
