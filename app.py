@@ -6,17 +6,14 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import plotly.subplots as sp
 from plotly.subplots import make_subplots
-# from scikit-learn.model_selection import train_test_split
-# from scikit-learn.compose import ColumnTransformer
-# from scikit-learn.preprocessing import OneHotEncoder
-# from scikit-learn.linear_model import LogisticRegression
-# from scikit-learn.pipeline import Pipeline
 
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from xgboost import XGBRegressor
 
 results = pd.read_csv(r'https://raw.githubusercontent.com/Prateek-013/IPL-Data-Analysis-Web-App/main/results.csv')
 deliveries = pd.read_csv(r'https://raw.githubusercontent.com/Prateek-013/IPL-Data-Analysis-Web-App/main/ipl_ball_by_ball_data.csv')
@@ -1172,7 +1169,7 @@ if user_menu == 'IPL Records':
         st.markdown("<br>", unsafe_allow_html=True)
 
 if user_menu == '2024 Predictions':
-    selected_option = st.sidebar.selectbox('Select Prediction Type', ['1st Innings: Predicted Score', '2nd Innings: Win Probability'])
+    selected_option = st.sidebar.selectbox('Select Prediction Type', ['1st Innings: Projected Score', '2nd Innings: Win Probability'])
     teams = ['Sunrisers Hyderabad', 'Mumbai Indians', 'Royal Challengers Bangalore', 'Kolkata Knight Riders', 'Punjab Kings', 'Chennai Super Kings',
              'Rajasthan Royals','Delhi Capitals', 'Lucknow Super Giants', 'Gujarat Titans']
 
@@ -1180,16 +1177,80 @@ if user_menu == '2024 Predictions':
        'Durban', 'Centurion', 'East London', 'Johannesburg', 'Kimberley', 'Cuttack', 'Ahmedabad', 'Nagpur', 'Dharamsala', 'Visakhapatnam',
        'Ranchi', 'Delhi', 'Abu Dhabi', 'Dubai', 'Sharjah', 'Pune', 'Indore', 'Guwahati', 'Lucknow']
 
-    # pipe = pickle.load(open('pipe.pkl', 'rb'))
+    
 
-    if selected_option == '1st Innings: Predicted Score':
+    if selected_option == '1st Innings: Projected Score':
         st.markdown("<h1 style='text-align: center;'>1st Innings Score Predictor</h1>",
                     unsafe_allow_html=True)
         st.write(
-            "Description: The predictive model employs logistic regression and one-hot encoding to forecast a cricket team's first innings score. Factors such as the home team, opposition, match venue, and current match dynamics (including runs scored, overs played, and wickets lost) are considered. This holistic approach captures the nuanced interplay of variables, providing accurate insights into expected first innings performance in cricket matches.")
+            "Description: The predictive model employs logistic regression and one-hot encoding to forecast a cricket team's first innings score. Factors such as the home team, opposition, match venue, and current match dynamics (including runs scored, overs played, and wickets lost) are considered. This holistic approach captures the nuanced interplay of variables, providing accurate insights into expected first innings performance in cricket matches. The model is trained on all completed IPL matches from 2008 to 2023.")
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
-        st.write('Model Coming Soon')
+
+        deliveries_df = results[['match_id', 'team1_name', 'team2_name', 'match_venue_city']].merge(
+            deliveries[deliveries['innings_no'] == 1], on='match_id').rename(
+            columns={'team1_name': 'batting_team', 'team2_name': 'bowling_team'})
+        deliveries_df['balls_left'] = 126 - (deliveries_df['over_number'] * 6 + deliveries_df['ball_number'])
+        deliveries_df['crr'] = (deliveries_df['current_innings_runs'] * 6) / (120 - deliveries_df['balls_left'])
+        deliveries_df['wickets_left'] = 10 - deliveries_df['current_innings_wickets']
+        deliveries_df['last_five'] = deliveries_df.groupby('match_id')['total_runs'].rolling(window=30).sum().values
+        deliveries_df['balls_left'] = deliveries_df['balls_left'].apply(lambda x: x if x >= 0 else 0)
+        deliveries_df = deliveries_df.merge(
+            deliveries_df.groupby('match_id')['current_innings_runs'].max().reset_index().rename(
+                columns={'current_innings_runs': 'total_innings_runs'}), on='match_id')
+        final_bat = deliveries_df[
+            ['batting_team', 'bowling_team', 'match_venue_city', 'current_innings_runs', 'wickets_left', 'crr',
+             'balls_left', 'last_five', 'total_innings_runs']]
+        final_bat = final_bat.dropna()
+        final_bat = final_bat.sample(final_bat.shape[0])
+        X = final_bat.drop(columns='total_innings_runs')
+        y = final_bat['total_innings_runs']
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
+        trf = ColumnTransformer([
+            ('trf', OneHotEncoder(drop='first'), ['batting_team', 'bowling_team', 'match_venue_city'])
+        ]
+            , remainder='passthrough')
+        pipe = Pipeline(steps=[
+            ('step1', trf),
+            ('step2', StandardScaler(with_mean=False)),
+            ('step3', XGBRegressor(n_estimators=1000, learning_rate=0.2, max_depth=12, random_state=1))
+        ])
+        pipe.fit(X_train, y_train)
+
+        col1, col2 = st.columns(2)
+                with col1:
+            batting_team = st.selectbox('Select Batting Team', sorted(teams))
+
+        with col2:
+            bowling_team = st.selectbox('Select Bowling Team', sorted(teams))
+
+        city = st.selectbox('Select Match Venue', sorted(cities))
+
+        col3, col4, col5 = st.columns(3)
+
+        with col3:
+            current_score = st.number_input('Current Score')
+
+        with col4:
+            overs_done = st.number_input('Overs Played (Works for over > 5')
+
+        with col5:
+            wickets = st.number_input('Wickets')
+
+        last_five = st.number_input('Runs Scored in Last Five Overs')
+                if st.button('Predict Projected Score'):
+            wickets_left = 10 - wickets
+            crr = current_score/overs_done
+            balls_left = 120 - (overs_done*6)
+
+            input_df = pd.DataFrame(
+                {'batting_team': [batting_team], 'bowling_team': [bowling_team], 'match_venue_city': [city],
+                 'current_innings_runs': [current_score], 'balls_left': [balls_left], 'wickets_left': [wickets_left], 'crr': [crr],
+                 'last_five': [last_five]})
+
+            result = pipe.predict(input_df)
+            st.header("Predicted Score - " + str(int(result[0])))
+        
         
     if selected_option == '2nd Innings: Win Probability':
         st.markdown("<h1 style='text-align: center;'>Win Probability Predictor in 2nd Innings</h1>",
