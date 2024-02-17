@@ -14,7 +14,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from xgboost import XGBRegressor
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression
 
 
 results = pd.read_csv(r'https://raw.githubusercontent.com/Prateek-013/IPL-Data-Analysis-Web-App/main/results.csv')
@@ -1244,7 +1244,7 @@ if user_menu == '2024 Predictions':
         pipe = Pipeline(steps=[
             ('step1', trf),
             ('step2', StandardScaler(with_mean=False)),
-            ('step3', RandomForestRegressor(n_estimators=100, random_state=1))
+            ('step3', LinearRegression())
         ])
         
         pipe.fit(X_train, y_train)
