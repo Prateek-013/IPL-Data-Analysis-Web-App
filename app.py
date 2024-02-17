@@ -1238,7 +1238,8 @@ if user_menu == '2024 Predictions':
             wickets = st.number_input('Wickets')
 
         last_five = st.number_input('Runs Scored in Last Five Overs')
-                if st.button('Predict Projected Score'):
+        
+        if st.button('Predict Projected Score'):
             wickets_left = 10 - wickets
             crr = current_score/overs_done
             balls_left = 120 - (overs_done*6)
