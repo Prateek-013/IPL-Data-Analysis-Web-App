@@ -1185,7 +1185,7 @@ if user_menu == '2024 Predictions':
         st.markdown("<h1 style='text-align: center;'>1st Innings Score Predictor</h1>",
                     unsafe_allow_html=True)
         st.write(
-            "Description: The predictive model employs logistic regression and one-hot encoding to forecast a cricket team's first innings score. Factors such as the home team, opposition, match venue, and current match dynamics (including runs scored, overs played, and wickets lost) are considered. This holistic approach captures the nuanced interplay of variables, providing accurate insights into expected first innings performance in cricket matches. The model is trained on all completed IPL matches from 2008 to 2023.")
+            "Welcome to our First Innings Score Estimator! This tool predicts the likely score a cricket team will achieve in their first innings. It considers essential factors like team composition, match location, and ongoing match dynamics such as runs scored and wickets taken. Designed for both cricket enthusiasts and strategic thinkers, our Estimator offers reliable insights to enhance your understanding of expected first innings performance. Enjoy the game with informed anticipation, courtesy of our user-friendly prediction model.")
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
 
@@ -1204,7 +1204,7 @@ if user_menu == '2024 Predictions':
             current_score = st.number_input('Current Score')
 
         with col4:
-            overs_done = st.number_input('Overs Played (Works for over > 5')
+            overs_done = st.number_input('Overs Played (Works for over > 5)')
 
         with col5:
             wickets = st.number_input('Wickets')
@@ -1267,9 +1267,7 @@ if user_menu == '2024 Predictions':
         st.markdown("<h1 style='text-align: center;'>Win Probability Predictor in 2nd Innings</h1>",
                     unsafe_allow_html=True)
         st.write(
-            "Description: This model predicts win probability for the batting and bowling teams in the 2nd innings of a cricket match. "
-            "It takes into account the batting team, bowling team, match venue, target score, and current match situation "
-            "(current run rate, required run rate, wickets left). The model provides win probability for both teams.")
+            "Explore our 2nd Innings Win Probability Predictor! This model forecasts the win probability for both the batting and bowling teams in a cricket match's second innings. Considered factors include team dynamics, match venue, target score, and real-time match situations like the current run rate, required run rate, and remaining wickets. Tailored for cricket enthusiasts and strategic analysts, our Predictor offers precise win probability insights, empowering you to anticipate the outcome with informed confidence.")
         
         total_score_df = deliveries.groupby(['match_id', 'innings_no'])['total_runs'].sum().reset_index()
         total_score_df = total_score_df[total_score_df['innings_no'] == 1]
