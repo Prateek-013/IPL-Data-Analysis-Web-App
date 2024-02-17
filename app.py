@@ -1228,6 +1228,9 @@ if user_menu == '2024 Predictions':
              'balls_left', 'last_five', 'total_innings_runs']]
         final_bat = final_bat.dropna()
         final_bat = final_bat.sample(final_bat.shape[0])
+        final_bat['batting_team'] = final_bat['batting_team'].str.replace('Dehli Capitals', 'Delhi Capitals')
+        final_bat['bowling_team'] = final_bat['bowling_team'].str.replace('Dehli Capitals', 'Delhi Capitals')
+        
         X = final_bat.drop(columns='total_innings_runs')
         y = final_bat['total_innings_runs']
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
