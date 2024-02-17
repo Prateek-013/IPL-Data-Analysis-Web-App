@@ -1218,7 +1218,7 @@ if user_menu == '2024 Predictions':
         pipe.fit(X_train, y_train)
 
         col1, col2 = st.columns(2)
-                with col1:
+        with col1:
             batting_team = st.selectbox('Select Batting Team', sorted(teams))
 
         with col2:
