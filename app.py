@@ -13,8 +13,8 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
-from xgboost import XGBRegressor
 from sklearn.linear_model import LinearRegression
+from lightgbm import LGBMRegressor
 
 
 results = pd.read_csv(r'https://raw.githubusercontent.com/Prateek-013/IPL-Data-Analysis-Web-App/main/results.csv')
@@ -1238,13 +1238,13 @@ if user_menu == '2024 Predictions':
         # pipe = Pipeline(steps=[
         #     ('step1', trf),
         #     ('step2', StandardScaler(with_mean=False)),
-        #     ('step3', XGBRegressor(n_estimators=1000, learning_rate=0.2, max_depth=12, random_state=1))
+        #     ('step3', LinearRegression())
         # ])
         
         pipe = Pipeline(steps=[
             ('step1', trf),
             ('step2', StandardScaler(with_mean=False)),
-            ('step3', LinearRegression())
+            ('step3', LGBMRegressor(n_estimators=1000, learning_rate=0.2, max_depth=12, random_state=1))
         ])
         
         pipe.fit(X_train, y_train)
