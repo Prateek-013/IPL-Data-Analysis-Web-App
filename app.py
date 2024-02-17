@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import plotly.subplots as sp
 from plotly.subplots import make_subplots
-import joblib
 
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
@@ -15,6 +14,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from xgboost import XGBRegressor
+
 
 results = pd.read_csv(r'https://raw.githubusercontent.com/Prateek-013/IPL-Data-Analysis-Web-App/main/results.csv')
 deliveries = pd.read_csv(r'https://raw.githubusercontent.com/Prateek-013/IPL-Data-Analysis-Web-App/main/ipl_ball_by_ball_data.csv')
@@ -1346,54 +1346,7 @@ if user_menu == '2024 Predictions':
             st.header(batting_team + "- " + str(round(win * 100)) + "%")
             st.header(bowling_team + "- " + str(round(loss * 100)) + "%")
             
-    if selected_option == '1st Innings: Predicted Score 2':
-        st.markdown("<h1 style='text-align: center;'>1st Innings Score Predictor</h1>",
-                    unsafe_allow_html=True)
-        st.write(
-            "Description: The predictive model employs logistic regression and one-hot encoding to forecast a cricket team's first innings score. Factors such as the home team, opposition, match venue, and current match dynamics (including runs scored, overs played, and wickets lost) are considered. This holistic approach captures the nuanced interplay of variables, providing accurate insights into expected first innings performance in cricket matches.")
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        pipe = joblib.load('pretrained_model.joblib', mmap_mode=None)
-
-        col1, col2 = st.columns(2)
-
-        with col1:
-            batting_team = st.selectbox('Select Batting Team', sorted(teams))
-
-        with col2:
-            bowling_team = st.selectbox('Select Bowling Team', sorted(teams))
-
-        city = st.selectbox('Select Match Venue', sorted(cities))
-
-        col3, col4, col5 = st.columns(3)
-
-        with col3:
-            current_score = st.number_input('Current Score')
-
-        with col4:
-            overs_done = st.number_input('Overs Played (Works for over > 5')
-
-        with col5:
-            wickets = st.number_input('Wickets')
-
-        last_five = st.number_input('Runs Scored in Last Five Overs')
-
-        if st.button('Predict Projected Score'):
-            wickets_left = 10 - wickets
-            crr = current_score/overs_done
-            balls_left = 120 - (overs_done*6)
-
-            input_df = pd.DataFrame(
-                {'batting_team': [batting_team], 'bowling_team': [bowling_team], 'match_venue_city': [city],
-                 'current_innings_runs': [current_score], 'balls_left': [balls_left], 'wickets_left': [wickets_left], 'crr': [crr],
-                 'last_five': [last_five]})
-
-            result = pipe.predict(input_df)
-            st.header("Predicted Score - " + str(int(result[0])))
-
-
-
+    
 
 
 
