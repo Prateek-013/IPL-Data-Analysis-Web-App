@@ -1202,15 +1202,15 @@ if user_menu == '2024 Predictions':
         col3, col4, col5 = st.columns(3)
 
         with col3:
-            current_score = st.number_input('Current Score')
+            current_score = st.number_input('Current Score', min_value=0, max_value=1000, step=1)
 
         with col4:
-            overs_done = st.number_input('Overs Played (Works for over > 5)')
+            overs_done = st.number_input('Overs Played (Works for over > 5)', min_value=0, max_value=20, value=5, step=1)
 
         with col5:
-            wickets = st.number_input('Wickets')
+            wickets = st.number_input('Wickets', min_value=0, max_value=10, step=1)
 
-        last_five = st.number_input('Runs Scored in Last Five Overs')
+        last_five = st.number_input('Runs Scored in Last Five Overs', min_value=0, max_value=180, step=1)
 
         deliveries_df = results[['match_id', 'team1_name', 'team2_name', 'match_venue_city']].merge(
             deliveries[deliveries['innings_no'] == 1], on='match_id').rename(
@@ -1325,16 +1325,16 @@ if user_menu == '2024 Predictions':
             bowling_team = st.selectbox('Select the Bowling Team', sorted(eligible_teams))
 
         selected_city = st.selectbox("Select Match Venue City", sorted(cities))
-        target = st.number_input('Target')
+        target = st.number_input('Target', min_value=0, max_value=1000, step=1)
 
         col3, col4, col5 = st.columns(3)
 
         with col3:
-            score = st.number_input('Current Score')
+            score = st.number_input('Current Score', min_value=0, max_value=1000, step=1)
         with col4:
-            overs = st.number_input('Overs Completed')
+            overs = st.number_input('Overs Completed', min_value=0, max_value=20, step=1)
         with col5:
-            wickets = st.number_input('Wickets')
+            wickets = st.number_input('Wickets', min_value=0, max_value=10, step=1)
 
         if st.button('Predict Probability'):
             runs_left = target - score
